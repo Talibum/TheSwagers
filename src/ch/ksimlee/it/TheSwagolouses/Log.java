@@ -39,10 +39,7 @@ public class Log {
 	 * @param message	The message to log.
 	 */
 	public static void error(String message) {
-		
-		if ( Level.ERROR.ordinal() >= CURRENT_LEVEL.ordinal() ) {
-			System.out.println(message);
-		}
+		log(Level.ERROR, message);
 	}
 	
 	/**
@@ -53,9 +50,7 @@ public class Log {
 	 *            The message to log.
 	 */
 	public static void warning(String message) {
-		
-		if ( Level.WARNING.ordinal() >= CURRENT_LEVEL.ordinal() ) {
-			System.out.println(message);
+		log(Level.WARNING, message);
 		}
 	}
 	
@@ -66,10 +61,7 @@ public class Log {
 	 * @param message	The message to log.
 	 */
 	public static void info(String message) {
-		
-		if ( Level.INFO.ordinal() >= CURRENT_LEVEL.ordinal() ) {
-			System.out.println(message);
-		}
+		log(Level.INFO, message);
 	}
 	
 	/**
@@ -79,10 +71,7 @@ public class Log {
 	 * @param message	The message to log.
 	 */
 	public static void debug(String message) {
-		
-		if ( Level.DEBUG.ordinal() >= CURRENT_LEVEL.ordinal() ) {
-			System.out.println(message);
-		}
+		log(Level.DEBUG, message);
 	}
 
 	/* ----- */
