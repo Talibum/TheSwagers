@@ -1,4 +1,4 @@
-package init;
+package ch.ksimlee.it.TheSwagolouses;
 
 public class Log {
 	

@@ -1,6 +1,6 @@
-package init;
+package ch.ksimlee.it.TheSwagolouses;
 
-import init.Log.Level;
+import ch.ksimlee.it.TheSwagolouses.Log.Level;
 
 
 
@@ -8,7 +8,7 @@ public class Game {
 	public static int x = 4;
 	
 	public static void main() {
-		Log.log(Level.DEBUG, "TEst loggin");
+		Log.log(Level.DEBUG, "Test loggin");
 		
 	}
 	public static int y() {
