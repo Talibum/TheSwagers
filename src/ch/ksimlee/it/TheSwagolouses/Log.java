@@ -8,7 +8,7 @@ public class Log {
 		
 	}
 	
-	private static Level CURRENT_LEVEL = Level.DEBUG;
+	private static Level CURRENT_LEVEL = Level.ERROR;
 	
 
 	public static void setLevel(Level level) {
@@ -40,7 +40,7 @@ public class Log {
 	 */
 	public static void error(String message) {
 		
-		if ( Level.ERROR == CURRENT_LEVEL) {
+		if ( Level.ERROR.ordinal() >= CURRENT_LEVEL.ordinal() ) {
 			System.out.println(message);
 		}
 	}
@@ -54,7 +54,7 @@ public class Log {
 	 */
 	public static void warning(String message) {
 		
-		if ( Level.WARNING == CURRENT_LEVEL) {
+		if ( Level.WARNING.ordinal() >= CURRENT_LEVEL.ordinal() ) {
 			System.out.println(message);
 		}
 	}
@@ -65,8 +65,11 @@ public class Log {
 	 *
 	 * @param message	The message to log.
 	 */
-	public static void info(String mesage) {
-		// TODO implement
+	public static void info(String message) {
+		
+		if ( Level.INFO.ordinal() >= CURRENT_LEVEL.ordinal() ) {
+			System.out.println(message);
+		}
 	}
 	
 	/**
@@ -75,8 +78,11 @@ public class Log {
 	 *
 	 * @param message	The message to log.
 	 */
-	public static void debug(String mesage) {
-		// TODO implement
+	public static void debug(String message) {
+		
+		if ( Level.DEBUG.ordinal() >= CURRENT_LEVEL.ordinal() ) {
+			System.out.println(message);
+		}
 	}
 
 	/* ----- */
