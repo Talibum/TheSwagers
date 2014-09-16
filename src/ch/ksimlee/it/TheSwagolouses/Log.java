@@ -51,7 +51,7 @@ public class Log {
 	 */
 	public static void warning(String message) {
 		log(Level.WARNING, message);
-		}
+		
 	}
 	
 	/**
