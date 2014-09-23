@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +24,10 @@ public class Canvas extends JPanel {
 	
 	public static final int WIDGHT = 800;
 	public static final int HIGHT = WIDGHT / 16*9;
+	private long aktuelleSekunde = 0;
+	private int Counter = 0;
+	private int lastFPS;
+	
 
 	// This variable stores the size of the canvas (in pixel).
 	private Dimension SIZE = new Dimension(WIDGHT, HIGHT);
@@ -40,6 +45,7 @@ public class Canvas extends JPanel {
 	       } catch (IOException ex) {
 	            // handle exception...
 	       }
+		
 
 		/*
 		 * The class timer (from swing) can be used to call a function
@@ -71,6 +77,7 @@ public class Canvas extends JPanel {
 
 		// Let the swing framework do it's drawing of the JPanel first.
 		super.paintComponent(g);
+		
 
 		// The following two commands draw the background:
 
@@ -84,6 +91,17 @@ public class Canvas extends JPanel {
 		g.setColor(Color.green);
 		g.fillRect(0,SIZE.height-40,SIZE.width, SIZE.height);
 		g.drawImage(mario,BewegungY, SIZE.height-190,null);
+		
+		long now = System.currentTimeMillis()/1000;
+		if(now>aktuelleSekunde){
+			aktuelleSekunde = now;
+			lastFPS = Counter;
+			Counter = 0;
+		}else{
+			Counter = Counter + 1;
+		}
+		g.setColor(Color.white);
+		g.drawString(""+lastFPS, SIZE.width-30, 20);
 		// TODO: Add more drawing commands here.
 
 	}
