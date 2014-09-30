@@ -5,47 +5,50 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
+import ch.ksimlee.it.TheSwagolouses.objects.RenderObject;
 
 @SuppressWarnings("serial")
 public class Canvas extends JPanel {
-	
-	public BufferedImage mario;
-	public int BewegungY = 40;
-	
-	public static final int WIDGHT = 800;
-	public static final int HIGHT = WIDGHT / 16*9;
-	private long aktuelleSekunde = 0;
-	private int Counter = 0;
-	private int lastFPS;
-	
 
 	// This variable stores the size of the canvas (in pixel).
-	private Dimension SIZE = new Dimension(WIDGHT, HIGHT);
+	public static final int HIGHT = 800;
+	public static final int WIDGHT = HIGHT / 16*9;
+	private Dimension SIZE = new Dimension(HIGHT, WIDGHT);
 
 	// This variable stores with how many frames per second (FPS) the canvas
 	// should be redrawn.
 	private static final int FPS = 25;
-
-	public Canvas() {
+	
+	/** Should the FPS be shown? */
+	private boolean showFPS = true;
+	
+	/** The actual FPS from the last secocnd. */
+	private int lastFPS = 0;
+	
+	/** The number of frames that have been rendered in this second (wall-clock). */
+	private int framesRenderedThisSecond = 0;
+	
+	/**
+	 * The second that is currently considered to be active, i.e., we add frames
+	 * to the counter as long as this second does not change.
+	 */
+	private long activeSecond = -1;
+	
+	/** The game object. */
+	private final Game game;
+	
+	public Canvas(Game game) {
 		setPreferredSize(SIZE);
-
-		Log.info("Initialized canvas.");
-		try {                
-	          mario = ImageIO.read(new File("Mario-Icon.jpg"));
-	       } catch (IOException ex) {
-	            // handle exception...
-	       }
 		
+		this.game = game;
+		
+		Log.info("Initialized canvas.");
 
 		/*
 		 * The class timer (from swing) can be used to call a function
@@ -77,33 +80,59 @@ public class Canvas extends JPanel {
 
 		// Let the swing framework do it's drawing of the JPanel first.
 		super.paintComponent(g);
-		
 
 		// The following two commands draw the background:
 
 		// Set the color of the "pen". This color will be used in the following
 		// drawing commands.
-		g.setColor(Color.blue);
+		g.setColor(Color.white);
 
 		// Draw a rectangle with the size of the canvas. Therefore, this draws a
 		// "background".
 		g.fillRect(0, 0, SIZE.width, SIZE.height);
-		g.setColor(Color.green);
-		g.fillRect(0,SIZE.height-40,SIZE.width, SIZE.height);
-		g.drawImage(mario,BewegungY, SIZE.height-190,null);
-		
-		long now = System.currentTimeMillis()/1000;
-		if(now>aktuelleSekunde){
-			aktuelleSekunde = now;
-			lastFPS = Counter;
-			Counter = 0;
-		}else{
-			Counter = Counter + 1;
-		}
-		g.setColor(Color.white);
-		g.drawString(""+lastFPS, SIZE.width-30, 20);
-		// TODO: Add more drawing commands here.
 
+		// Render all objects.
+		for (RenderObject object : game.getObjectsToRender()) {
+			object.render(g);
+		}
+		
+		// Calculate the actual FPS.
+		updateFps();
+
+		if (showFPS) {
+			g.setColor(Color.black);
+			g.drawString("FPS: " + lastFPS, SIZE.width - 60, 20);
+		}
+		
+	}
+	
+	/**
+	 * This function counts the actually rendered FPS.
+	 */
+	private void updateFps() {
+		
+		// Get the current time in seconds since 1.1.1970.
+		long now = System.currentTimeMillis() / 1000;
+		
+		if (now > activeSecond) {
+			// The second switched.
+			
+			// Store the FPS that we counted.
+			lastFPS = framesRenderedThisSecond;
+			
+			// Reset the counter.
+			framesRenderedThisSecond = 0;
+			
+			// Update the second.
+			activeSecond = now;
+			
+		} else {
+			// We are still in the same second (wall-clock).
+			
+			// Increase the counter by one.
+			framesRenderedThisSecond++;
+		}
+		
 	}
 
 }
