@@ -1,20 +1,23 @@
 package ch.ksimlee.it.TheSwagolouses;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.SortedSet;
-import java.util.concurrent.ConcurrentSkipListSet;
 
+import ch.ksimlee.it.TheSwagolouses.objects.Mario;
 import ch.ksimlee.it.TheSwagolouses.objects.RenderObject;
 import ch.ksimlee.it.TheSwagolouses.objects.Spaceship;
 
 
 public class Game implements Runnable {
 	
-	private static final int ACTIONS_PER_SECOND = 10;
+	private static final int ACTIONS_PER_SECOND = 24;
 	
 	/** A list of all objects that can be rendered. */
-	private final SortedSet<RenderObject> objectsToRender = new ConcurrentSkipListSet<RenderObject>();
+	private final List<RenderObject> objectsToRender = new ArrayList<RenderObject>();
 	
 	private final Spaceship spaceship;
+	private final Mario mario;
 	
 	public Game() {
 		
@@ -22,15 +25,18 @@ public class Game implements Runnable {
 		
 		// Create the spaceship.
 		spaceship = new Spaceship(200, 200);
+		mario = new Mario(10, Canvas.WIDGHT-10);
 		
 		// Add the spaceship to the list of renderable objects.
 		objectsToRender.add(spaceship);
+		objectsToRender.add(mario);
 		
 		Log.info("Game initialized.");
 	}
 
 	@Override
 	public void run() {
+		int i = 1;
 		
 		while (true) {
 			// This loop goes forever, since we don't want our game
@@ -39,10 +45,19 @@ public class Game implements Runnable {
 			// TODO: Add game mechanics here.
 			
 			// XXX: Example
+			mario.setX(mario.getX() + 5);
+
+			
+			if (mario.getX() > Canvas.HIGHT){
+				mario.setX(-40);
+			}
+			
+			
 			spaceship.setX(spaceship.getX() + 5);
 			if (spaceship.getX() >  400) {
 				spaceship.setX(200);
 			}
+			
 			
 			// Delay the next action (iteration of the loop).
 			try {
@@ -60,7 +75,7 @@ public class Game implements Runnable {
 		
 	}
 	
-	public SortedSet<RenderObject> getObjectsToRender() {
+	public List<RenderObject> getObjectsToRender() {
 		return objectsToRender;
 	}
 

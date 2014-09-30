@@ -29,7 +29,7 @@ public class Canvas extends JPanel {
 	private boolean showFPS = true;
 	
 	/** The actual FPS from the last secocnd. */
-	private int lastFPS = 0;
+	public static int lastFPS = 0;
 	
 	/** The number of frames that have been rendered in this second (wall-clock). */
 	private int framesRenderedThisSecond = 0;
@@ -94,6 +94,7 @@ public class Canvas extends JPanel {
 		// Render all objects.
 		for (RenderObject object : game.getObjectsToRender()) {
 			object.render(g);
+			Log.debug("Rendering Object" + object.getClass());
 		}
 		
 		// Calculate the actual FPS.

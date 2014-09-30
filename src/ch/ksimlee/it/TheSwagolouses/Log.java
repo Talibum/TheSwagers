@@ -8,7 +8,7 @@ public class Log {
 		
 	}
 	
-	private static Level CURRENT_LEVEL = Level.ERROR;
+	private static Level CURRENT_LEVEL = Level.DEBUG;
 	
 
 	public static void setLevel(Level level) {
