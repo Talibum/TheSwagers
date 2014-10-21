@@ -1,6 +1,8 @@
 package ch.ksimlee.it.TheSwagolouses.objects;
 import java.awt.Graphics;
 
+import ch.ksimlee.it.TheSwagolouses.InputHandler;
+
 
 /**
  * This class can be extended by classes that can render themselves on the
@@ -48,6 +50,30 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	@Override
 	public int compareTo(RenderObject o) {
 		return zIndex - o.zIndex;
+	}
+	public void update(InputHandler currentInput) {
+		// Default: Do nothing
+	}
+	
+	/**
+	 * Move this object.
+	 * 
+	 * @param dx
+	 *            Delta x to move.
+	 * @param dy
+	 *            Delta y to move.
+	 */
+	public void move(int dx, int dy) {
+		this.x += dx;
+		this.y += dy;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		return false;
 	}
 
 	public int getX() {

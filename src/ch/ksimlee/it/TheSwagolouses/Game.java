@@ -11,10 +11,13 @@ import ch.ksimlee.it.TheSwagolouses.objects.Spaceship;
 
 public class Game implements Runnable {
 	
-	private static final int ACTIONS_PER_SECOND = 24;
+	private static final int ACTIONS_PER_SECOND = 30;
 	
 	/** A list of all objects that can be rendered. */
 	private final List<RenderObject> objectsToRender = new ArrayList<RenderObject>();
+	
+	/** The handler that should receive the user input. */
+		private final InputHandler inputHandler = new InputHandler();
 	
 	private final Spaceship spaceship;
 	private final Mario mario;
@@ -45,18 +48,16 @@ public class Game implements Runnable {
 			// TODO: Add game mechanics here.
 			
 			// XXX: Example
-			mario.setX(mario.getX() + 5);
-
+			mario.update(inputHandler);
 			
-			if (mario.getX() > Canvas.HIGHT){
-				mario.setX(-40);
-			}
+			// Update the input state.
+					inputHandler.updatedReleasedKeys();
 			
 			
-			spaceship.setX(spaceship.getX() + 5);
-			if (spaceship.getX() >  400) {
-				spaceship.setX(200);
-			}
+			spaceship.update(inputHandler);
+					
+						// Update the input state.
+						inputHandler.updatedReleasedKeys();
 			
 			
 			// Delay the next action (iteration of the loop).
@@ -78,5 +79,9 @@ public class Game implements Runnable {
 	public List<RenderObject> getObjectsToRender() {
 		return objectsToRender;
 	}
+	public InputHandler getInputHandler() {
+				return inputHandler;
+			}
+	}
 
-}
+
