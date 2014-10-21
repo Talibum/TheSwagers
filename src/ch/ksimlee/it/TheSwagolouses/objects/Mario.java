@@ -16,8 +16,8 @@ public class Mario extends ImageObject {
 
 	private int speed = 7;
 	private boolean isjumping = false;
-	private int MaxJumpHight = 20;
-	private int currentJumpHight = 1;
+	private int MaxJumpHight = 5;
+	private int currentJumpHight;
 
 	public Mario(int x, int y) {
 		super(x, y, zIndex, FILENAME);
@@ -37,17 +37,17 @@ public class Mario extends ImageObject {
 			
 			move(speed, 0);
 		}
-		if (currentInput.isKeyPressed(KeyEvent.VK_W) ||
-				currentInput.isKeyPressed(KeyEvent.VK_UP)) {
+		if (currentInput.isKeyPressed(KeyEvent.VK_SPACE)) {
 			isjumping = true;
+			currentJumpHight = 1;
 			
 		}
 		if(isjumping){
-			move(0,-currentJumpHight - 1);
 			if(currentJumpHight <= MaxJumpHight){
 				currentJumpHight++;
+				move(0,-3);  
 			}
-
+			
 		}
 
 	}
