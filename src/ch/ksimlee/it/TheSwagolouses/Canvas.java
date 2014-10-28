@@ -93,7 +93,7 @@ public class Canvas extends JPanel {
 
 		// Render all objects.
 		for (RenderObject object : game.getObjectsToRender()) {
-			object.render(g);
+			object.renderInternal(g);
 			Log.debug("Rendering Object" + object.getClass());
 		}
 		

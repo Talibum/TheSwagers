@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
 
-import ch.ksimlee.it.TheSwagolouses.objects.Mario;
+
 import ch.ksimlee.it.TheSwagolouses.objects.RenderObject;
 import ch.ksimlee.it.TheSwagolouses.objects.Spaceship;
 
@@ -20,7 +20,7 @@ public class Game implements Runnable {
 		private final InputHandler inputHandler = new InputHandler();
 	
 	private final Spaceship spaceship;
-	private final Mario mario;
+	
 	
 	public Game() {
 		
@@ -28,18 +28,18 @@ public class Game implements Runnable {
 		
 		// Create the spaceship.
 		spaceship = new Spaceship(200, 200);
-		mario = new Mario(10, Canvas.WIDGHT-10);
+		
 		
 		// Add the spaceship to the list of renderable objects.
 		objectsToRender.add(spaceship);
-		objectsToRender.add(mario);
+		
 		
 		Log.info("Game initialized.");
 	}
 
 	@Override
 	public void run() {
-		int i = 1;
+		
 		
 		while (true) {
 			// This loop goes forever, since we don't want our game
@@ -48,16 +48,10 @@ public class Game implements Runnable {
 			// TODO: Add game mechanics here.
 			
 			// XXX: Example
-			mario.update(inputHandler);
-			
-			// Update the input state.
-					inputHandler.updatedReleasedKeys();
-			
-			
-			spaceship.update(inputHandler);
-					
-						// Update the input state.
-						inputHandler.updatedReleasedKeys();
+			// Update all game objects.
+			for (RenderObject object : objectsToRender) {
+				object.update(inputHandler, objectsToRender);
+			}
 			
 			
 			// Delay the next action (iteration of the loop).

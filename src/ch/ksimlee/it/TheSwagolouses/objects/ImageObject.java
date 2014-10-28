@@ -32,10 +32,10 @@ public class ImageObject extends RenderObject {
 	 * @param filename
 	 *            The filename of the image to render.
 	 */
-	public ImageObject(int x, int y, int zIndex, String filename) {
+	public ImageObject(int x, int y, int zIndex, boolean collision, String filename) {
 		
 		// Call the constructor of the parent class.
-		super(x, y, zIndex);
+		super(x, y, zIndex, collision);
 		
 		// Check if the provided file name makes sense.
 		if (filename == null) {
@@ -55,10 +55,20 @@ public class ImageObject extends RenderObject {
 		}
 	}
 
-	@Override
+	
 	public void render(Graphics g) {
 
 		g.drawImage(image, x, y, null);
 	}
+	
+		public int getWidth() {
+			return image.getWidth();
+		}
+	
+		
+		public int getHeight() {
+			return image.getHeight();
+		}
+	
 
 }
