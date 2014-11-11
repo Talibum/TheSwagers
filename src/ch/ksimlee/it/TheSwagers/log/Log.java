@@ -1,18 +1,27 @@
-package ch.ksimlee.it.TheSwagolouses;
+package ch.ksimlee.it.TheSwagers.log;
 
+/**
+ * This is a simple implementation for logging. It contains functionality to log
+ * messages of different severity, and to change the level dynamically.
+ */
 public class Log {
 	
 	public enum Level {
-		DEBUG,INFO,WARNING,ERROR  //ordinal order
-
-		
+		DEBUG, INFO, WARNING, ERROR
 	}
 	
+	/** The level of the logger. Determines which messages are actually logged. */
 	private static Level CURRENT_LEVEL = Level.INFO;
 	
-
+	/**
+	 * Set the level of this logger.
+	 *
+	 * @param level
+	 *            The new level to use.
+	 */
 	public static void setLevel(Level level) {
-		// TODO update the level
+		
+		CURRENT_LEVEL = level;
 	}
 
 	/**
@@ -26,10 +35,10 @@ public class Log {
 	 */
 	public static void log(Level level, String message) {
 		
-		if (level.ordinal() >= CURRENT_LEVEL.ordinal()) {
+		if (CURRENT_LEVEL.ordinal() <= level.ordinal()) {
+			
 			System.out.println(message);
 		}
-		
 	}
 	
 	/**
@@ -51,7 +60,6 @@ public class Log {
 	 */
 	public static void warning(String message) {
 		log(Level.WARNING, message);
-		
 	}
 	
 	/**

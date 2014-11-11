@@ -1,4 +1,4 @@
-package ch.ksimlee.it.TheSwagolouses;
+package ch.ksimlee.it.TheSwagers;
 
 import java.awt.EventQueue;
 

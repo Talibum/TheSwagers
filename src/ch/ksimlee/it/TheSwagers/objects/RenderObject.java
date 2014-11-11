@@ -1,14 +1,13 @@
-package ch.ksimlee.it.TheSwagolouses.objects;
+package ch.ksimlee.it.TheSwagers.objects;
+
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
-import ch.ksimlee.it.TheSwagolouses.Canvas;
-import ch.ksimlee.it.TheSwagolouses.InputHandler;
-import ch.ksimlee.it.TheSwagolouses.Log;
-
+import ch.ksimlee.it.TheSwagers.Canvas;
+import ch.ksimlee.it.TheSwagers.Game;
+import ch.ksimlee.it.TheSwagers.log.Log;
 
 /**
  * This class can be extended by classes that can render themselves on the
@@ -16,13 +15,17 @@ import ch.ksimlee.it.TheSwagolouses.Log;
  */
 public abstract class RenderObject implements Comparable<RenderObject> {
 	
+	/** Should the bounding boxes of objects be drawn? */
+	public static boolean SHOW_BOUNDING_BOX = true;
+	
 	/** The X coordinate of this render object. */
 	protected int x;
 	
 	/** The Y coordinate of this render object. */
 	protected int y;
 	
-	public static boolean SHOW_BOUNDING_BOX = true;
+	/** Can other objects collide with this object? */
+	protected boolean hasCollision = false;
 	
 	/**
 	 * The zIndex is responsible for how much in front the object is drawn. The
@@ -31,10 +34,31 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	 */
 	protected int zIndex;
 	
-	protected boolean hasCollision = false;
+	/**
+	 * Create a new render object with coordinates.
+	 * 
+	 * @param x
+	 *            The initial X coordinate.
+	 * @param y
+	 *            The initial Y coordinate.
+	 * @param zIndex
+	 *            The initial zIndex of the object.
+	 * @param collision
+	 *            Can other objects collide with this object?
+	 */
+	public RenderObject(int x, int y, int zIndex, boolean collision) {
+		this.x = x;
+		this.y = y;
+		this.zIndex = zIndex;
+		this.hasCollision = collision;
+	}
 	
-	
-	public void update(InputHandler currentInput, Set<RenderObject> allObjects) {
+	/**
+	 * Update this object based on the current user input.
+	 * 
+	 * @param game The current game in which this object is.
+	 */
+	public void update(Game game) {
 		// Default: Do nothing
 	}
 	
@@ -48,18 +72,17 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	 * @param allObjects
 	 *            All objects that currently exist.
 	 * 
-	 * @return True, if there was a collision.
+	 * @return True, iff there was a collision.
 	 */
-	public boolean move(int dx, int dy, List<RenderObject> allObjects) {
+	public RenderObject move(int dx, int dy, Set<RenderObject> allObjects) {
 		
-		// Did we encounter a collision during the movement?
-		boolean collision = false;
+		RenderObject collision = null;
 		
 		if (hasCollision) {
 			// We need to check for collision.
 			
 			// Create a set for all possible collision targets.
-			List<RenderObject> collisionTargets = new ArrayList<RenderObject>();
+			Set<RenderObject> collisionTargets = new HashSet<RenderObject>();
 			
 			// Add all _other_ objects that have collision.
 			for (RenderObject object : allObjects) {
@@ -100,14 +123,14 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 					
 					if (overlapsWithObject(object)) {
 						// There is a collision!
-						collision = true;
+						collision = object;
 						
 						// Exit the loop of checking for collisions directly.
 						break;
 					}
 				}
 				
-				if (collision) {
+				if (collision != null) {
 					// There was a collision!
 					
 					// Move one step back, to the last position, because
@@ -134,7 +157,7 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 			this.y += dy;
 		}
 		
-		if (collision) {
+		if (collision != null) {
 			Log.info("There was a collision!");
 		}
 		
@@ -149,53 +172,11 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	 *            The other object.
 	 * @return True, iff the objects overlap.
 	 */
-	
-	/**
-	 * Create a new render object with coordinates.
-	 * 
-	 * @param x
-	 *            The initial X coordinate.
-	 * @param y
-	 *            The initial Y coordinate.
-	 * @param zIndex
-	 *            The initial zIndex of the object.
-	 */
-	public RenderObject(int x, int y, int zIndex, boolean collision) {
-		this.x = x;
-		this.y = y;
-		this.zIndex = zIndex;
-		this.hasCollision = collision;
-	}
-
-	/**
-	 * Render this object on the Canvas' graphic area.
-	 * 
-	 * @param g
-	 *            The graphics object to render itself on.
-	 */
-	public abstract void render(Graphics g);
-	
-	@Override
-	public int compareTo(RenderObject o) {
-		return zIndex - o.zIndex;
-	}
-	public void update(InputHandler currentInput, List<RenderObject> objectsToRender) {
-		// Default: Do nothing
-	}
-	
-	/**
-	 * Move this object.
-	 * 
-	 * @param dx
-	 *            Delta x to move.
-	 * @param dy
-	 *            Delta y to move.
-	 */
 	private boolean overlapsWithObject(RenderObject other) {
-				return (x < other.x + other.getWidth() &&
-				        x + getWidth() > other.x &&
-				        y < other.y + other.getHeight() &&
-				        y + getHeight()  > other.y);
+		return (x < other.x + other.getWidth() &&
+		        x + getWidth() > other.x &&
+		        y < other.y + other.getHeight() &&
+		        y + getHeight()  > other.y);
 	}
 	
 	@Override
@@ -206,10 +187,19 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 		return false;
 	}
 	
+	public int getCenterX() {
+		return x + getWidth() / 2;
+	}
+	
+	public int getCenterY() {
+		return y + getHeight() / 2;
+	}
+	
 	public abstract int getWidth();
 	
 	public abstract int getHeight();
-	/*
+	
+	/**
 	 * Internal function to render objects.
 	 * 
 	 * @param g
@@ -235,8 +225,18 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 		}
 	}
 	
+	/**
+	 * Render this object on the Canvas' graphic area.
+	 * 
+	 * @param g
+	 *            The graphics object to render itself on.
+	 */
+	public abstract void render(Graphics g);
 	
-	
+	@Override
+	public int compareTo(RenderObject o) {
+		return zIndex - o.zIndex;
+	}
 
 	public int getX() {
 		return x;

@@ -1,11 +1,10 @@
-package ch.ksimlee.it.TheSwagolouses;
-
+package ch.ksimlee.it.TheSwagers;
 
 import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 
-
+import ch.ksimlee.it.TheSwagers.log.Log;
 
 /**
  * Class that handles the input of the user. It stores the keys that are

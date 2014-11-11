@@ -1,4 +1,4 @@
-package ch.ksimlee.it.TheSwagolouses;
+package ch.ksimlee.it.TheSwagers;
 
 import java.awt.BorderLayout;
 import java.awt.KeyEventDispatcher;
@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 
+import ch.ksimlee.it.TheSwagers.log.Log;
 
 @SuppressWarnings("serial")
 public class Window extends JFrame {
@@ -15,7 +16,7 @@ public class Window extends JFrame {
 	 * This variable stores the title of the game. As it will not change at
 	 * runtime, we defined it as "final", meaning that it _cannot_ be modified.
 	 */
-	public static final String GAME_TITLE = "brat";
+	public static final String GAME_TITLE = "Space Invaders";
 
 	/*
 	 * This is the constructor of the class. Every object that is created with a
@@ -33,8 +34,6 @@ public class Window extends JFrame {
 		// Specify what should happen when the close button is clicked (Swing
 		// function). 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
-		setLocationRelativeTo(null);
 
 		// Specify the layout that should be used inside this JFrame (swing
 		// function).
@@ -55,24 +54,24 @@ public class Window extends JFrame {
 
 		Log.info("Initialized main window.");
 	}
+
 	/**
-		 * This functions is used to setup all the handling of user inputs, e.g.,
-		 * keystrokes.
-		 * @param game 
-		 */
-		private void setupInput(final Game game) {
-	
-			KeyboardFocusManager.getCurrentKeyboardFocusManager()
-					.addKeyEventDispatcher(new KeyEventDispatcher() {
-				
-				@Override
-				public boolean dispatchKeyEvent(KeyEvent e) {
+	 * This functions is used to setup all the handling of user inputs, e.g.,
+	 * keystrokes.
+	 * @param game 
+	 */
+	private void setupInput(final Game game) {
+
+		KeyboardFocusManager.getCurrentKeyboardFocusManager()
+				.addKeyEventDispatcher(new KeyEventDispatcher() {
+			
+			@Override
+			public boolean dispatchKeyEvent(KeyEvent e) {
 				game.getInputHandler().handleKeyEvent(e);
 				return false;
-				}
-			});
-	
-		}
-	
-	 }
+			}
+		});
 
+	}
+	
+}

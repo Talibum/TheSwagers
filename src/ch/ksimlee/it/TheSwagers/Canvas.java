@@ -1,4 +1,4 @@
-package ch.ksimlee.it.TheSwagolouses;
+package ch.ksimlee.it.TheSwagers;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,20 +6,20 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import ch.ksimlee.it.TheSwagolouses.objects.RenderObject;
+import ch.ksimlee.it.TheSwagers.log.Log;
+import ch.ksimlee.it.TheSwagers.objects.RenderObject;
 
 @SuppressWarnings("serial")
 public class Canvas extends JPanel {
 
 	// This variable stores the size of the canvas (in pixel).
-	public static final int HIGHT = 800;
-	public static final int WIDGHT = HIGHT / 16*9;
-	private Dimension SIZE = new Dimension(HIGHT, WIDGHT);
+	private Dimension SIZE = new Dimension(640, 480);
 
 	// This variable stores with how many frames per second (FPS) the canvas
 	// should be redrawn.
@@ -29,7 +29,7 @@ public class Canvas extends JPanel {
 	private boolean showFPS = true;
 	
 	/** The actual FPS from the last secocnd. */
-	public static int lastFPS = 0;
+	private int lastFPS = 0;
 	
 	/** The number of frames that have been rendered in this second (wall-clock). */
 	private int framesRenderedThisSecond = 0;
@@ -91,10 +91,13 @@ public class Canvas extends JPanel {
 		// "background".
 		g.fillRect(0, 0, SIZE.width, SIZE.height);
 
+		// Get all objects, and sort them according to ther zIndex.
+		List<RenderObject> gameObjects = new ArrayList<RenderObject>(game.getObjectsToRender());
+		Collections.sort(gameObjects);
+		
 		// Render all objects.
-		for (RenderObject object : game.getObjectsToRender()) {
+		for (RenderObject object : gameObjects) {
 			object.renderInternal(g);
-			Log.debug("Rendering Object" + object.getClass());
 		}
 		
 		// Calculate the actual FPS.

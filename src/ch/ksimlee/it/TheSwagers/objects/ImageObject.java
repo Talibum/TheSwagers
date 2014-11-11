@@ -1,4 +1,4 @@
-package ch.ksimlee.it.TheSwagolouses.objects;
+package ch.ksimlee.it.TheSwagers.objects;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -7,8 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import ch.ksimlee.it.TheSwagolouses.Log;
-
+import ch.ksimlee.it.TheSwagers.log.Log;
 
 /**
  * {@link ImageObject}s are used to represent objects that render an image from
@@ -29,6 +28,8 @@ public class ImageObject extends RenderObject {
 	 *            The initial y coordinate.
 	 * @param zIndex
 	 *            The initial zIndex.
+	 * @param collision
+	 *            Can other objects collide with this one?
 	 * @param filename
 	 *            The filename of the image to render.
 	 */
@@ -55,20 +56,20 @@ public class ImageObject extends RenderObject {
 		}
 	}
 
-	
+	@Override
 	public void render(Graphics g) {
 
 		g.drawImage(image, x, y, null);
 	}
-	
-		public int getWidth() {
-			return image.getWidth();
-		}
-	
-		
-		public int getHeight() {
-			return image.getHeight();
-		}
-	
+
+	@Override
+	public int getWidth() {
+		return image.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return image.getHeight();
+	}
 
 }
