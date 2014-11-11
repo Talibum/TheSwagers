@@ -16,7 +16,7 @@ public class Window extends JFrame {
 	 * This variable stores the title of the game. As it will not change at
 	 * runtime, we defined it as "final", meaning that it _cannot_ be modified.
 	 */
-	public static final String GAME_TITLE = "Space Invaders";
+	public static final String GAME_TITLE = "The Swagers";
 
 	/*
 	 * This is the constructor of the class. Every object that is created with a
@@ -34,6 +34,8 @@ public class Window extends JFrame {
 		// Specify what should happen when the close button is clicked (Swing
 		// function). 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		setResizable(false);
 
 		// Specify the layout that should be used inside this JFrame (swing
 		// function).

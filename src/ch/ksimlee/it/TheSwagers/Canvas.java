@@ -17,9 +17,15 @@ import ch.ksimlee.it.TheSwagers.objects.RenderObject;
 
 @SuppressWarnings("serial")
 public class Canvas extends JPanel {
+	
+	public final int HEIGHT = 720;
+	public final int WIDGHT = 1280;
+	public final int WORLD_WIDGHT = 5000;
 
 	// This variable stores the size of the canvas (in pixel).
-	private Dimension SIZE = new Dimension(640, 480);
+	public Dimension SIZE = new Dimension(WIDGHT, HEIGHT);
+	public Dimension WORLD = new Dimension(WORLD_WIDGHT,HEIGHT);
+	
 
 	// This variable stores with how many frames per second (FPS) the canvas
 	// should be redrawn.
