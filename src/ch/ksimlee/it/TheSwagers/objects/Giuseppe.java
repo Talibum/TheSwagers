@@ -7,7 +7,7 @@ import ch.ksimlee.it.TheSwagers.Game;
 /**
  * This is a spaceship that will be controlled by the player.
  */
-public class Spaceship extends ImageObject {
+public class Giuseppe extends ImageObject {
 	
 	/** Path to the image on the filesystem. */
 	private static final String FILENAME = "batman_black.gif";
@@ -15,12 +15,9 @@ public class Spaceship extends ImageObject {
 	private static final int zIndex = 100;
 	
 	private int speed = 10;
-	
-	private static final int shotDelay = 5;
-	
-	private int shotTimeout = 0; 
+	 
 
-	public Spaceship(int x, int y) {
+	public Giuseppe(int x, int y) {
 		super(x, y, zIndex, true, FILENAME);
 	}
 
@@ -42,17 +39,7 @@ public class Spaceship extends ImageObject {
 		}
 		
 		// Check if we need to shoot.
-		if (game.getInputHandler().isKeyPressed(KeyEvent.VK_SPACE) &&
-				shotTimeout == 0) {
-			
-			game.getObjectsToAdd().add(new Shot(this));
-			
-			shotTimeout = shotDelay;
-		}
-		
-		if (shotTimeout > 0) {
-			shotTimeout--;
-		}
 	}
 
 }
+

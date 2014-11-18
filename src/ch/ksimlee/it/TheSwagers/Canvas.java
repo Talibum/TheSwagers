@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import ch.ksimlee.it.TheSwagers.log.Log;
+import ch.ksimlee.it.TheSwagers.objects.Giuseppe;
 import ch.ksimlee.it.TheSwagers.objects.RenderObject;
 
 @SuppressWarnings("serial")
@@ -20,12 +21,15 @@ public class Canvas extends JPanel {
 	
 	public final int HEIGHT = 720;
 	public final int WIDGHT = 1280;
-	public final int WORLD_WIDGHT = 5000;
+	
 
 	// This variable stores the size of the canvas (in pixel).
 	public Dimension SIZE = new Dimension(WIDGHT, HEIGHT);
-	public Dimension WORLD = new Dimension(WORLD_WIDGHT,HEIGHT);
 	
+	public int scrollX = 200;
+	public int  scrollY;
+	
+	public int scrolllimitX = 50;
 
 	// This variable stores with how many frames per second (FPS) the canvas
 	// should be redrawn.
@@ -78,14 +82,25 @@ public class Canvas extends JPanel {
 
 		Log.info("Drawing timer started.");
 	}
+	
+	public void scroll(){
+		
+	
+		
+	}
 
 	// This function draws this canvas (it draws the JPanel).
 	public void paintComponent(Graphics g) {
 
 		Log.debug("Painting the canvas.");
+		
+		
 
 		// Let the swing framework do it's drawing of the JPanel first.
 		super.paintComponent(g);
+		if(game.giuseppe.getX() > SIZE.width - scrolllimitX + scrollX ){
+			scrollX+=20;
+		}
 
 		// The following two commands draw the background:
 
@@ -103,7 +118,7 @@ public class Canvas extends JPanel {
 		
 		// Render all objects.
 		for (RenderObject object : gameObjects) {
-			object.renderInternal(g);
+			object.renderInternal(g,this);
 		}
 		
 		// Calculate the actual FPS.

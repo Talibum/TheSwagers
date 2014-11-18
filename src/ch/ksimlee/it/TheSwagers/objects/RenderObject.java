@@ -72,7 +72,7 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	 * @param allObjects
 	 *            All objects that currently exist.
 	 * 
-	 * @return True, iff there was a collision.
+	 * @return True, if there was a collision.
 	 */
 	public RenderObject move(int dx, int dy, Set<RenderObject> allObjects) {
 		
@@ -170,7 +170,7 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	 * 
 	 * @param other
 	 *            The other object.
-	 * @return True, iff the objects overlap.
+	 * @return True, if the objects overlap.
 	 */
 	private boolean overlapsWithObject(RenderObject other) {
 		return (x < other.x + other.getWidth() &&
@@ -199,16 +199,25 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	
 	public abstract int getHeight();
 	
+
+	
 	/**
 	 * Internal function to render objects.
 	 * 
 	 * @param g
 	 *            The graphics context to render on.
 	 */
-	public final void renderInternal(Graphics g) {
+	
+
+	public final void renderInternal(Graphics g,Canvas c) {
 
 		// Perform the actual rendering.
+		int oldx = x;
+		
+		x = x - c.scrollX;
+		
 		render(g);
+		
 
 		// Perform the debug rendering.
 		
@@ -216,13 +225,17 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 
 			// Store the current color.
 			Color color = g.getColor();
+			
+			
 
 			g.setColor(Color.magenta);
 			g.drawRect(x, y, getWidth(), getHeight());
 
 			// Restore the color.
 			g.setColor(color);
+			
 		}
+		x = oldx;
 	}
 	
 	/**
@@ -237,6 +250,7 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	public int compareTo(RenderObject o) {
 		return zIndex - o.zIndex;
 	}
+
 
 	public int getX() {
 		return x;

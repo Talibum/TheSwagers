@@ -5,15 +5,21 @@ import java.util.Set;
 
 import ch.ksimlee.it.TheSwagers.log.Log;
 import ch.ksimlee.it.TheSwagers.objects.Alien;
+import ch.ksimlee.it.TheSwagers.objects.Giuseppe;
 import ch.ksimlee.it.TheSwagers.objects.Ground;
 import ch.ksimlee.it.TheSwagers.objects.RenderObject;
 import ch.ksimlee.it.TheSwagers.objects.Spaceship;
 import ch.ksimlee.it.TheSwagers.Canvas;
+
 import java.awt.Dimension;
+
+
 
 public class Game implements Runnable {
 	
 	private static final int ACTIONS_PER_SECOND = 30;
+	
+	
 	
 	/** A list of all objects that can be rendered. */
 	private final Set<RenderObject> objectsToRender = new HashSet<RenderObject>();
@@ -34,20 +40,21 @@ public class Game implements Runnable {
 	/** The handler that should receive the user input. */
 	private final InputHandler inputHandler = new InputHandler();
 	
-	private final Spaceship spaceship;
+	
 	private final Ground ground;
+	public final Giuseppe giuseppe;
 	
 	public Game() {
 		
 		Log.info("Starting a game with " + ACTIONS_PER_SECOND + " actions/second.");
-		setPreferredSize(WORLD);
+		
 		
 		// Create the spaceship.
-		spaceship = new Spaceship(200, 200);
-		ground = new Ground(200,200);
+		giuseppe = new Giuseppe(200, 200);
+		ground = new Ground(500,500);
 		
 		// Add the spaceship to the list of renderable objects.
-		objectsToRender.add(spaceship);
+		objectsToRender.add(giuseppe);
 		objectsToRender.add(ground);
 		
 		for (int i = 0; i < 500; i += 100) {

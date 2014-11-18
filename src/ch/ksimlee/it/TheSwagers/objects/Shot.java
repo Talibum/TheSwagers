@@ -36,7 +36,7 @@ public class Shot extends ImageObject {
 			}
 		}
 		
-		if (y <= -getHeight()|| x <= -getWidth()||y <= getHeight()|| x <= getWidth()) {
+		if (y <= -getHeight()) {
 			// The shot is outside of the visible area.
 			game.getObjectsToRemove().add(this);
 		}
