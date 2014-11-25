@@ -8,16 +8,13 @@ import ch.ksimlee.it.TheSwagers.objects.Alien;
 import ch.ksimlee.it.TheSwagers.objects.Giuseppe;
 import ch.ksimlee.it.TheSwagers.objects.Ground;
 import ch.ksimlee.it.TheSwagers.objects.RenderObject;
-import ch.ksimlee.it.TheSwagers.objects.Spaceship;
-import ch.ksimlee.it.TheSwagers.Canvas;
 
-import java.awt.Dimension;
 
 
 
 public class Game implements Runnable {
 	
-	private static final int ACTIONS_PER_SECOND = 30;
+	private static final int ACTIONS_PER_SECOND = 50;
 	
 	
 	
@@ -51,7 +48,7 @@ public class Game implements Runnable {
 		
 		// Create the spaceship.
 		giuseppe = new Giuseppe(200, 200);
-		ground = new Ground(500,500);
+		ground = new Ground(200,500);
 		
 		// Add the spaceship to the list of renderable objects.
 		objectsToRender.add(giuseppe);

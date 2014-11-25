@@ -73,7 +73,19 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	 *            All objects that currently exist.
 	 * 
 	 * @return True, if there was a collision.
+	 * 
 	 */
+	
+	
+	public void jump(int startP,int h,int jumpS,Set<RenderObject> allObjects ){
+		
+		if(startP + getY() <= startP + h){
+			move(0,jumpS, allObjects);
+		}
+	
+		
+		
+	}
 	public RenderObject move(int dx, int dy, Set<RenderObject> allObjects) {
 		
 		RenderObject collision = null;
@@ -213,8 +225,10 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 
 		// Perform the actual rendering.
 		int oldx = x;
+		int oldy = y;
 		
 		x = x - c.scrollX;
+		y = y - c.scrollY;
 		
 		render(g);
 		

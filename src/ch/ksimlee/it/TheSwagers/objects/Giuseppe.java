@@ -14,7 +14,10 @@ public class Giuseppe extends ImageObject {
 	
 	private static final int zIndex = 100;
 	
-	private int speed = 10;
+	private int speed = 5;
+	
+	private boolean JumpEnabled = false;
+	private int jumpcounter = 50;
 	 
 
 	public Giuseppe(int x, int y) {
@@ -23,6 +26,27 @@ public class Giuseppe extends ImageObject {
 
 	@Override
 	public void update(Game game) {
+		
+		if (jumpcounter <= 0){
+			RenderObject move = move(0, speed, game.getObjectsToRender())
+		}
+		
+		
+		
+		if(move != null){
+			JumpEnabled = true;
+			
+			
+		}
+		
+		if (game.getInputHandler().isKeyPressed(KeyEvent.VK_SPACE) && JumpEnabled == true) {
+			
+			jump(getY(), 100, 500,game.getObjectsToRender());
+			System.out.println("lol");
+		
+		}
+		
+		
 		
 		// Check if we need to move left.
 		if (game.getInputHandler().isKeyPressed(KeyEvent.VK_A) ||
@@ -36,10 +60,14 @@ public class Giuseppe extends ImageObject {
 				game.getInputHandler().isKeyPressed(KeyEvent.VK_RIGHT)) {
 			
 			move(speed, 0, game.getObjectsToRender());
+			
 		}
-		
-		// Check if we need to shoot.
 	}
-
+	
 }
+		
+		
+
+
+
 

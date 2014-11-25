@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import ch.ksimlee.it.TheSwagers.log.Log;
-import ch.ksimlee.it.TheSwagers.objects.Giuseppe;
 import ch.ksimlee.it.TheSwagers.objects.RenderObject;
 
 @SuppressWarnings("serial")
@@ -26,14 +25,15 @@ public class Canvas extends JPanel {
 	// This variable stores the size of the canvas (in pixel).
 	public Dimension SIZE = new Dimension(WIDGHT, HEIGHT);
 	
-	public int scrollX = 200;
-	public int  scrollY;
+	public int scrollX = 0;
+	public int  scrollY = 0;
 	
-	public int scrolllimitX = 50;
+	public int scrolllimitX = 200;
+	public int scrolllimitY = 100;
 
 	// This variable stores with how many frames per second (FPS) the canvas
 	// should be redrawn.
-	private static final int FPS = 30;
+	private static final int FPS = 50;
 	
 	/** Should the FPS be shown? */
 	private boolean showFPS = true;
@@ -83,11 +83,7 @@ public class Canvas extends JPanel {
 		Log.info("Drawing timer started.");
 	}
 	
-	public void scroll(){
-		
-	
-		
-	}
+
 
 	// This function draws this canvas (it draws the JPanel).
 	public void paintComponent(Graphics g) {
@@ -98,9 +94,25 @@ public class Canvas extends JPanel {
 
 		// Let the swing framework do it's drawing of the JPanel first.
 		super.paintComponent(g);
+		
+		
 		if(game.giuseppe.getX() > SIZE.width - scrolllimitX + scrollX ){
-			scrollX+=20;
+			int verschX1 = game.giuseppe.getX()- (SIZE.width - scrolllimitX + scrollX);
+			scrollX+= verschX1;
 		}
+		if(game.giuseppe.getX() < scrolllimitX + scrollX ){
+			int verschX2 = (scrolllimitX + scrollX) - game.giuseppe.getX();
+			scrollX-= verschX2;
+		}
+		if(game.giuseppe.getY() > SIZE.height - scrolllimitY+ scrollY ){
+			int verschY1 = game.giuseppe.getY()- (SIZE.height - scrolllimitY + scrollY);
+			scrollY += verschY1;
+		}
+		if(game.giuseppe.getY() < scrolllimitY + scrollY ){
+			int verschY2  = (scrolllimitY + scrollY) - game.giuseppe.getY();
+			scrollY -= verschY2;
+		}
+		
 
 		// The following two commands draw the background:
 
