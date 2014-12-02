@@ -95,7 +95,7 @@ public class Canvas extends JPanel {
 		// Let the swing framework do it's drawing of the JPanel first.
 		super.paintComponent(g);
 		
-		
+		// scrolling
 		if(game.giuseppe.getX() > SIZE.width - scrolllimitX + scrollX ){
 			int verschX1 = game.giuseppe.getX()- (SIZE.width - scrolllimitX + scrollX);
 			scrollX+= verschX1;

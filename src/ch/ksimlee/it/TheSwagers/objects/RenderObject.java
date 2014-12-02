@@ -77,15 +77,12 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	 */
 	
 	
-	public void jump(int startP,int h,int jumpS,Set<RenderObject> allObjects ){
-		
-		if(startP + getY() <= startP + h){
-			move(0,jumpS, allObjects);
+	public void jump(){
+
 		}
 	
 		
-		
-	}
+	
 	public RenderObject move(int dx, int dy, Set<RenderObject> allObjects) {
 		
 		RenderObject collision = null;

@@ -2,30 +2,34 @@ package ch.ksimlee.it.TheSwagers.objects;
 
 import ch.ksimlee.it.TheSwagers.Game;
 
-public class Shot extends ImageObject {
+public class Weapon_Pizza extends ImageObject {
 	
 	/** Path to the image on the filesystem. */
 	private static final String FILENAME = "shot.png";
 	
 	private static final int zIndex = 100;
 	
+	private int direction;
+	
 	private int speed = 10;
 
-	public Shot(int x, int y) {
+	public Weapon_Pizza(int x, int y) {
 		super(x, y, zIndex, true, FILENAME, 0);
 	}
 
-	public Shot(Spaceship spaceship) {
+	public Weapon_Pizza(Giuseppe giuseppe) {
 		this(0,0);
 		
-		x = spaceship.getCenterX() - getWidth() / 2;
-		y = spaceship.y - getHeight();
+		
+		direction = giuseppe.GetDirection();a
+		x = giuseppe.getCenterX() - getWidth() / 2;
+		y = giuseppe.y - getHeight();
 	}
 
 	@Override
 	public void update(Game game) {
 		
-		RenderObject collision = move(0, -speed, game.getObjectsToRender());
+		RenderObject collision = move(speed, 0, game.getObjectsToRender());
 		
 		if (collision != null) {
 			if (collision instanceof Alien) {
@@ -42,4 +46,3 @@ public class Shot extends ImageObject {
 		}
 	}
 }
-

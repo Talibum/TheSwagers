@@ -14,7 +14,7 @@ public class Explosion extends ImageObject {
 	private int speed = 10;
 
 	public Explosion(int x, int y) {
-		super(x, y, zIndex, false, FILENAME);
+		super(x, y, zIndex, false, FILENAME,0);
 	}
 	
 	public Explosion(RenderObject object) {

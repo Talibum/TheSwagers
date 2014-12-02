@@ -21,7 +21,7 @@ public class Spaceship extends ImageObject {
 	private int shotTimeout = 0; 
 
 	public Spaceship(int x, int y) {
-		super(x, y, zIndex, true, FILENAME);
+		super(x, y, zIndex, true, FILENAME, 0);
 	}
 
 	@Override

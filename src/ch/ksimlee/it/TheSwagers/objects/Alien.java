@@ -9,10 +9,11 @@ public class Alien extends ImageObject {
 	
 	private static final int zIndex = 100;
 	
+	
 	private int speed = 10;
 
 	public Alien(int x, int y) {
-		super(x, y, zIndex, true, FILENAME);
+		super(x, y, zIndex, true, FILENAME, 0);
 	}
 
 	@Override
