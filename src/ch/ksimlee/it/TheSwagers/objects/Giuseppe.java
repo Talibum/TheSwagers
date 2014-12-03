@@ -10,18 +10,20 @@ import ch.ksimlee.it.TheSwagers.Game;
 public class Giuseppe extends ImageObject {
 	
 	/** Path to the image on the filesystem. */
-	private static final String FILENAME = "batman_black.gif";
+	private static final String FILENAME = "batman.jpg";
 	
 	
 	private static final int zIndex = 100;
 	
 	private int speed = 4;
 	private int direction;
-	private int jumpspeed = -5;
+	private int jumpspeed = -6;
 	
 	private boolean JumpEnabled = false;
 	private int jumpcounter = 0;
 	RenderObject move;
+	
+	int WeaponCooldown;
 	 
 
 	public Giuseppe(int x, int y) {
@@ -53,7 +55,7 @@ public class Giuseppe extends ImageObject {
 		
 		else if(jumpcounter <= 10 && jumpcounter > 0){
 			jumpcounter --;
-			move(0,-3,game.getObjectsToRender());
+			move(0,-2,game.getObjectsToRender());
 		}
 		
 		else{
@@ -83,6 +85,14 @@ public class Giuseppe extends ImageObject {
 			
 			move(0, speed, game.getObjectsToRender());
 		}
+		
+		if(game.getInputHandler().isKeyPressed(KeyEvent.VK_W) && WeaponCooldown <= 0){
+			game.getObjectsToAdd().add(new Weapon_Pizza(this));
+			WeaponCooldown = 10;
+			
+		}
+		
+		WeaponCooldown --;
 	}
 	
 	public int GetDirection(){

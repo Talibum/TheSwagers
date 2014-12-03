@@ -5,14 +5,14 @@ import ch.ksimlee.it.TheSwagers.Game;
 public class Shot extends ImageObject {
 	
 	/** Path to the image on the filesystem. */
-	private static final String FILENAME = "shot.png";
+	private static final String FILENAME = "batman.jpg";
 	
 	private static final int zIndex = 100;
 	
 	private int speed = 10;
 
 	public Shot(int x, int y) {
-		super(x, y, zIndex, true, FILENAME, 0);
+		super(x, y, zIndex, true, FILENAME);
 	}
 
 	public Shot(Spaceship spaceship) {

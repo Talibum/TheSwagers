@@ -33,7 +33,7 @@ public class ImageObject extends RenderObject {
 	 * @param filename
 	 *            The filename of the image to render.
 	 */
-	public ImageObject(int x, int y, int zIndex, boolean collision, String filename, int direction) {
+	public ImageObject(int x, int y, int zIndex, boolean collision, String filename) {
 		
 		// Call the constructor of the parent class.
 		super(x, y, zIndex, collision);

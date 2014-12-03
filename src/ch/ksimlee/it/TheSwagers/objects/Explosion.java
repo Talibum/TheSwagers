@@ -5,7 +5,7 @@ import ch.ksimlee.it.TheSwagers.Game;
 public class Explosion extends ImageObject {
 	
 	/** Path to the image on the filesystem. */
-	private static final String FILENAME = "explosion.png";
+	private static final String FILENAME = "batman.jpg";
 	
 	private static final int zIndex = 100;
 	
@@ -14,7 +14,7 @@ public class Explosion extends ImageObject {
 	private int speed = 10;
 
 	public Explosion(int x, int y) {
-		super(x, y, zIndex, false, FILENAME,0);
+		super(x, y, zIndex, false, FILENAME);
 	}
 	
 	public Explosion(RenderObject object) {
