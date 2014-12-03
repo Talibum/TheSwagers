@@ -22,7 +22,8 @@ public class Giuseppe extends ImageObject {
 	private boolean JumpEnabled = false;
 	private int jumpcounter = 0;
 	
-	int WeaponCooldown = 0;
+	private int WeaponCooldown = 0;
+	
 	
 	RenderObject move;
 	 

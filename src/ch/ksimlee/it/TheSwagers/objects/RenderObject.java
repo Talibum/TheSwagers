@@ -77,10 +77,6 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	 */
 	
 	
-	public void jump(){
-
-		}
-	
 		
 	
 	public RenderObject move(int dx, int dy, Set<RenderObject> allObjects) {

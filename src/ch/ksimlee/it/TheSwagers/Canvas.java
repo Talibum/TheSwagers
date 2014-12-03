@@ -3,6 +3,7 @@ package ch.ksimlee.it.TheSwagers;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class Canvas extends JPanel {
 	
 
 	// This variable stores the size of the canvas (in pixel).
-	public Dimension SIZE = new Dimension(WIDGHT, HEIGHT);
+	public Dimension SIZE = new Dimension(5000, HEIGHT);
 	
 	public int scrollX = 0;
 	public int  scrollY = 0;
@@ -31,6 +32,7 @@ public class Canvas extends JPanel {
 	public int scrolllimitX = 200;
 	public int scrolllimitY = 100;
 
+	
 	// This variable stores with how many frames per second (FPS) the canvas
 	// should be redrawn.
 	private static final int FPS = 50;
@@ -123,8 +125,9 @@ public class Canvas extends JPanel {
 		// Draw a rectangle with the size of the canvas. Therefore, this draws a
 		// "background".
 		g.fillRect(0, 0, SIZE.width, SIZE.height);
+		
 
-		// Get all objects, and sort them according to ther zIndex.
+		// Get all objects, and sort them according to their zIndex.
 		List<RenderObject> gameObjects = new ArrayList<RenderObject>(game.getObjectsToRender());
 		Collections.sort(gameObjects);
 		

@@ -8,6 +8,7 @@ import ch.ksimlee.it.TheSwagers.objects.Alien;
 import ch.ksimlee.it.TheSwagers.objects.Giuseppe;
 import ch.ksimlee.it.TheSwagers.objects.Ground;
 import ch.ksimlee.it.TheSwagers.objects.RenderObject;
+import ch.ksimlee.it.TheSwagers.objects.WeaponDisplay;
 
 
 
@@ -40,6 +41,7 @@ public class Game implements Runnable {
 	
 	private final Ground ground;
 	public final Giuseppe giuseppe;
+	public final WeaponDisplay weapondisplay;
 	
 	public Game() {
 		
@@ -49,10 +51,14 @@ public class Game implements Runnable {
 		// Create the spaceship.
 		giuseppe = new Giuseppe(200, 200);
 		ground = new Ground(200,500);
+		weapondisplay = new WeaponDisplay(0, 0);
+	
 		
 		// Add the spaceship to the list of renderable objects.
 		objectsToRender.add(giuseppe);
 		objectsToRender.add(ground);
+		objectsToRender.add(weapondisplay);
+		
 		
 		for (int i = 0; i < 500; i += 100) {
 			objectsToRender.add(new Alien(i, 100));
