@@ -12,6 +12,8 @@ public class Weapon_Pizza extends ImageObject {
 	private int direction;
 	
 	private int speed = 10;
+	
+	RenderObject shot;
 
 	public Weapon_Pizza(int x, int y) {
 		super(x, y, zIndex, true, FILENAME);
@@ -22,21 +24,31 @@ public class Weapon_Pizza extends ImageObject {
 		
 		
 		direction = giuseppe.GetDirection();
-		x = giuseppe.getCenterX() - getWidth() / 2;
-		y = giuseppe.y - getHeight();
+		if(direction == 1) {
+			x = giuseppe.x - getWidth();
+		}
+		else{
+			x = giuseppe.x + getWidth();
+		}
+		
+		y = giuseppe.y;
 	}
 
 	@Override
 	public void update(Game game) {
 		
 		if (direction == 1) {
-			move(-speed, 0, game.getObjectsToRender());
+			
+			
+			shot = move(-speed, 0, game.getObjectsToRender());
 		}
 		else{
-			move(speed, 0, game.getObjectsToRender());
+			shot = move(speed, 0, game.getObjectsToRender());
 		}
 		
-		
+		if(shot != null) {
+			game.getObjectsToRemove().add(shot);
+		}
 		
 		if (y <= -getHeight()) {
 			// The shot is outside of the visible area.

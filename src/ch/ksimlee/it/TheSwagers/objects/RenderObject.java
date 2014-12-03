@@ -196,13 +196,7 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 		return false;
 	}
 	
-	public int getCenterX() {
-		return x + getWidth() / 2;
-	}
 	
-	public int getCenterY() {
-		return y + getHeight() / 2;
-	}
 	
 	public abstract int getWidth();
 	
@@ -247,6 +241,7 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 			
 		}
 		x = oldx;
+		y = oldy;
 	}
 	
 	/**
@@ -285,6 +280,14 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 
 	public void setzIndex(int zIndex) {
 		this.zIndex = zIndex;
+	}
+	
+	public int getCenterX() {
+		return x + getWidth() / 2;
+	}
+	
+	public int getCenterY() {
+		return y + getHeight() / 2;
 	}
 
 }

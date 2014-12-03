@@ -21,9 +21,10 @@ public class Giuseppe extends ImageObject {
 	
 	private boolean JumpEnabled = false;
 	private int jumpcounter = 0;
-	RenderObject move;
 	
-	int WeaponCooldown;
+	int WeaponCooldown = 0;
+	
+	RenderObject move;
 	 
 
 	public Giuseppe(int x, int y) {
@@ -32,7 +33,7 @@ public class Giuseppe extends ImageObject {
 
 	@Override
 	public void update(Game game) {
-		
+		//jumping
 		if (jumpcounter <= 0){
 			move = move(0, speed, game.getObjectsToRender());
 			
@@ -48,24 +49,25 @@ public class Giuseppe extends ImageObject {
 			if (game.getInputHandler().isKeyPressed(KeyEvent.VK_SPACE) && JumpEnabled) {
 				
 				jumpcounter = 20;
+				JumpEnabled = false;
 				
 			}
 			
 		}
-		
-		else if(jumpcounter <= 10 && jumpcounter > 0){
-			jumpcounter --;
-			move(0,-2,game.getObjectsToRender());
-		}
-		
 		else{
-			jumpcounter --;
-			move(0,jumpspeed,game.getObjectsToRender());
+			if(jumpcounter <= 7 && jumpcounter >= 0){
+				move(0,-3,game.getObjectsToRender());
+				jumpcounter --;
+			}
+			else{
+				jumpcounter --;
+				move(0,jumpspeed,game.getObjectsToRender());
+			}
 		}
 		
 		
 		
-		// Check if we need to move left.
+		// Keys
 		if (game.getInputHandler().isKeyPressed(KeyEvent.VK_A) ||
 				game.getInputHandler().isKeyPressed(KeyEvent.VK_LEFT)) {
 			
@@ -73,7 +75,7 @@ public class Giuseppe extends ImageObject {
 			direction = 1;
 		}
 		
-		// Check if we need to move right.
+		
 		if (game.getInputHandler().isKeyPressed(KeyEvent.VK_D) ||
 				game.getInputHandler().isKeyPressed(KeyEvent.VK_RIGHT)) {
 			
