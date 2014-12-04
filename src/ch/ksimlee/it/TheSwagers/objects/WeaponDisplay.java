@@ -19,23 +19,6 @@ public class WeaponDisplay extends ImageObject {
 	}
 	
 	public void update(Game game) {
-		if(game.getInputHandler().isKeyPressed(KeyEvent.VK_W) && MagCapacity > 0){
-			MagCapacity--;
-		}
-		if(MagCapacity <= 0 ){
-			ReloadNeed = true;
-			System.out.println("reloading?");
-			
-		}
-		if(game.getInputHandler().isKeyPressed(KeyEvent.VK_R)) {
-			ReloadNeed = false;
-			MagCapacity = 30;
-			System.out.println("reloaded!!!");
-		}
-	}
-	
-
-	public boolean GetReloadNeed() {
-		return ReloadNeed;
+		
 	}
 }

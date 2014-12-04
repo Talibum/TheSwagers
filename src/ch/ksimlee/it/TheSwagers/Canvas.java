@@ -24,7 +24,7 @@ public class Canvas extends JPanel {
 	
 
 	// This variable stores the size of the canvas (in pixel).
-	public Dimension SIZE = new Dimension(5000, HEIGHT);
+	public Dimension SIZE = new Dimension(WIDGHT, HEIGHT);
 	
 	public int scrollX = 0;
 	public int  scrollY = 0;

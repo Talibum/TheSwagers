@@ -24,6 +24,11 @@ public class Giuseppe extends ImageObject {
 	
 	private int WeaponCooldown = 0;
 	
+	private int MagCapacity = 10;
+	private int ReloadSpeed = 50;
+	private boolean ReloadingInProcess = false;
+	
+	
 	
 	RenderObject move;
 	 
@@ -68,7 +73,9 @@ public class Giuseppe extends ImageObject {
 		
 		
 		
-		// Keys
+		// KEYS
+		
+		//Movement Process
 		if (game.getInputHandler().isKeyPressed(KeyEvent.VK_A) ||
 				game.getInputHandler().isKeyPressed(KeyEvent.VK_LEFT)) {
 			
@@ -89,19 +96,39 @@ public class Giuseppe extends ImageObject {
 			move(0, speed, game.getObjectsToRender());
 		}
 		
-		if(game.getInputHandler().isKeyPressed(KeyEvent.VK_W) && WeaponCooldown <= 0){
+		//Shooting Process
+		if(game.getInputHandler().isKeyPressed(KeyEvent.VK_W) && WeaponCooldown <= 0 && MagCapacity != 0){
 			game.getObjectsToAdd().add(new Weapon_Pizza(this));
 			WeaponCooldown = 10;
+			MagCapacity --;
 			
 		}
 		
+		//Reloading Process
+		if(game.getInputHandler().isKeyPressed(KeyEvent.VK_R)) {
+			
+				ReloadingInProcess = true;
+			
+		}
+		
+		if(ReloadingInProcess) {
+			if(ReloadSpeed > 0) {
+				ReloadSpeed--;
+			}
+			else{
+				ReloadingInProcess = false;
+				ReloadSpeed = 50;
+				MagCapacity = 10;
+				System.out.println("Reloaded!");
+			}
+		}
+	
 		WeaponCooldown --;
 	}
 	
 	public int GetDirection(){
 		return direction;
 	}
-	
 }
 		
 		
