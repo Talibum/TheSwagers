@@ -129,6 +129,7 @@ public class Giuseppe extends ImageObject {
 	public int GetDirection(){
 		return direction;
 	}
+	
 }
 		
 		
