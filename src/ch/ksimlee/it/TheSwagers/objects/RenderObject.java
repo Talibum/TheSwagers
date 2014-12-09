@@ -16,7 +16,7 @@ import ch.ksimlee.it.TheSwagers.log.Log;
 public abstract class RenderObject implements Comparable<RenderObject> {
 	
 	/** Should the bounding boxes of objects be drawn? */
-	public static boolean SHOW_BOUNDING_BOX = true;
+	public static boolean SHOW_BOUNDING_BOX = false;
 	
 	/** The X coordinate of this render object. */
 	protected int x;
@@ -33,6 +33,8 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	 * drawn.
 	 */
 	protected int zIndex;
+	
+	protected Set <Class> CollisionObjects = new HashSet<Class>();
 	
 	/**
 	 * Create a new render object with coordinates.
@@ -92,7 +94,7 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 			// Add all _other_ objects that have collision.
 			for (RenderObject object : allObjects) {
 				
-				if (object != this && object.hasCollision) {
+				if (object != this && object.hasCollision && CollisionObjects.contains(object.getClass())) {
 					collisionTargets.add(object);
 				}
 			}
@@ -206,16 +208,20 @@ public abstract class RenderObject implements Comparable<RenderObject> {
 	 * @param g
 	 *            The graphics context to render on.
 	 */
-	
+	public boolean IsFixPos(){
+		return false;
+	}
 
-	public final void renderInternal(Graphics g,Canvas c) {
+	public void renderInternal(Graphics g,Canvas c) {
 
 		// Perform the actual rendering.
 		int oldx = x;
 		int oldy = y;
 		
+		if(! IsFixPos()){
 		x = x - c.scrollX;
 		y = y - c.scrollY;
+		}
 		
 		render(g);
 		

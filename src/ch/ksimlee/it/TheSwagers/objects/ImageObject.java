@@ -71,5 +71,9 @@ public class ImageObject extends RenderObject {
 	public int getHeight() {
 		return image.getHeight();
 	}
+	public boolean IsFixPos() {
+		// TODO Auto-generated method stub
+		return super.IsFixPos();
+	}
 
 }

@@ -6,10 +6,14 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -52,13 +56,31 @@ public class Canvas extends JPanel {
 	 */
 	private long activeSecond = -1;
 	
+	private BufferedImage background;
+	
+	
 	/** The game object. */
 	private final Game game;
 	
 	public Canvas(Game game) {
 		setPreferredSize(SIZE);
+		String filename = "background.jpg";
+		
+		try {
+			// Try to load the image from the fail system.
+			background = ImageIO.read(new File(filename));
+			
+		} catch (IOException e) {
+			// This branch is only executed if an exception was thrown inside
+			// the "try{ ... }" block.
+			background = null;
+			Log.error("Failed to load image: " + filename);
+			e.printStackTrace();
+		}
 		
 		this.game = game;
+		
+		game.canvas = this;
 		
 		Log.info("Initialized canvas.");
 
@@ -125,6 +147,8 @@ public class Canvas extends JPanel {
 		// Draw a rectangle with the size of the canvas. Therefore, this draws a
 		// "background".
 		g.fillRect(0, 0, SIZE.width, SIZE.height);
+		g.drawImage(background, 0, 0, null);
+		
 		
 
 		// Get all objects, and sort them according to their zIndex.
@@ -149,6 +173,10 @@ public class Canvas extends JPanel {
 	/**
 	 * This function counts the actually rendered FPS.
 	 */
+	
+	
+
+
 	private void updateFps() {
 		
 		// Get the current time in seconds since 1.1.1970.
@@ -174,5 +202,11 @@ public class Canvas extends JPanel {
 		}
 		
 	}
-
+	public int GetScrollX(){
+		return scrollX;
+	}
+	
+	public int GetScrollY(){
+		return scrollY;
+	}
 }

@@ -1,11 +1,14 @@
 package ch.ksimlee.it.TheSwagers.objects;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import ch.ksimlee.it.TheSwagers.Game;
 
 public class Weapon_Pizza extends ImageObject {
 	
 	/** Path to the image on the filesystem. */
-	private static final String FILENAME = "batman.jpg";
+	private static final String FILENAME = "pizza.jpeg";
 	
 	private static final int zIndex = 100;
 	
@@ -14,9 +17,17 @@ public class Weapon_Pizza extends ImageObject {
 	private int speed = 10;
 	
 	RenderObject shot;
-
+	
+	private Set <Class> destroyableObjects;
+	
+	
+	
 	public Weapon_Pizza(int x, int y) {
 		super(x, y, zIndex, true, FILENAME);
+		
+		destroyableObjects = new HashSet<Class>();
+		destroyableObjects.add(Alien.class);
+		CollisionObjects.add(Alien.class);
 	}
 
 	public Weapon_Pizza(Giuseppe giuseppe) {
@@ -46,7 +57,7 @@ public class Weapon_Pizza extends ImageObject {
 			shot = move(speed, 0, game.getObjectsToRender());
 		}
 		
-		if(shot != null) {
+		if(shot != null && destroyableObjects.contains(shot.getClass())) {
 			game.getObjectsToRemove().add(shot);
 		}
 		

@@ -42,6 +42,8 @@ public class Game implements Runnable {
 	private final Ground ground;
 	public final Giuseppe giuseppe;
 	public final WeaponDisplay weapondisplay;
+	public Canvas canvas;
+	//private int ScrollX = canvas.GetScrollX;
 	
 	public Game() {
 		
@@ -49,9 +51,10 @@ public class Game implements Runnable {
 		
 		
 		// Create the spaceship.
-		giuseppe = new Giuseppe(200, 200);
-		ground = new Ground(200,500);
+		ground = new Ground(0,500);
 		weapondisplay = new WeaponDisplay(0, 0);
+		giuseppe = new Giuseppe(200, 200, weapondisplay);
+		weapondisplay.giuseppel = giuseppe;
 	
 		
 		// Add the spaceship to the list of renderable objects.

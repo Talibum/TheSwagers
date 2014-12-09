@@ -5,7 +5,7 @@ import ch.ksimlee.it.TheSwagers.Game;
 public class Alien extends ImageObject {
 	
 	/** Path to the image on the filesystem. */
-	private static final String FILENAME = "alien.gif";
+	private static final String FILENAME = "batman_black.gif";
 	
 	private static final int zIndex = 100;
 	
@@ -14,6 +14,8 @@ public class Alien extends ImageObject {
 
 	public Alien(int x, int y) {
 		super(x, y, zIndex, true, FILENAME);
+		CollisionObjects.add(Ground.class);
+		CollisionObjects.add(Alien.class);
 	}
 
 	@Override

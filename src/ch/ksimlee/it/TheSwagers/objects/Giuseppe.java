@@ -10,7 +10,7 @@ import ch.ksimlee.it.TheSwagers.Game;
 public class Giuseppe extends ImageObject {
 	
 	/** Path to the image on the filesystem. */
-	private static final String FILENAME = "batman.jpg";
+	private static final String FILENAME = "batman_black.gif";
 	
 	
 	private static final int zIndex = 100;
@@ -28,13 +28,16 @@ public class Giuseppe extends ImageObject {
 	private int ReloadSpeed = 50;
 	private boolean ReloadingInProcess = false;
 	
-	
+	public WeaponDisplay weapondisplay;
 	
 	RenderObject move;
 	 
 
-	public Giuseppe(int x, int y) {
+	public Giuseppe(int x, int y,WeaponDisplay b) {
 		super(x, y, zIndex, true, FILENAME);
+		weapondisplay = b;
+		CollisionObjects.add(Ground.class);
+		CollisionObjects.add(Alien.class);
 	}
 
 	@Override
@@ -129,7 +132,7 @@ public class Giuseppe extends ImageObject {
 	public int GetDirection(){
 		return direction;
 	}
-	///
+	
 }
 		
 		

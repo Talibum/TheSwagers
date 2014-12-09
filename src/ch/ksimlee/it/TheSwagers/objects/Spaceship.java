@@ -10,7 +10,7 @@ import ch.ksimlee.it.TheSwagers.Game;
 public class Spaceship extends ImageObject {
 	
 	/** Path to the image on the filesystem. */
-	private static final String FILENAME = "batman.jpg";
+	private static final String FILENAME = "batman_black.gif";
 	
 	private static final int zIndex = 100;
 	
