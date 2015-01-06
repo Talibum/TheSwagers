@@ -1,5 +1,6 @@
 package ch.ksimlee.it.TheSwagers;
 
+import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,9 +40,9 @@ public class Game implements Runnable {
 	private final InputHandler inputHandler = new InputHandler();
 	
 	
-	private final Ground ground;
-	public final Giuseppe giuseppe;
-	public final WeaponDisplay weapondisplay;
+	private  Ground ground;
+	public  Giuseppe giuseppe;
+	public  WeaponDisplay weapondisplay;
 	public Canvas canvas;
 	//private int ScrollX = canvas.GetScrollX;
 	
@@ -50,27 +51,41 @@ public class Game implements Runnable {
 		Log.info("Starting a game with " + ACTIONS_PER_SECOND + " actions/second.");
 		
 		
-		// Create the spaceship.
-		ground = new Ground(0,500);
-		weapondisplay = new WeaponDisplay(0, 0);
-		giuseppe = new Giuseppe(200, 200, weapondisplay);
-		weapondisplay.giuseppel = giuseppe;
-	
 		
-		// Add the spaceship to the list of renderable objects.
-		objectsToRender.add(giuseppe);
-		objectsToRender.add(ground);
-		objectsToRender.add(weapondisplay);
-		
-		
-		for (int i = 0; i < 500; i += 100) {
-			objectsToRender.add(new Alien(i, 100));
-		}
-		
-	
+	initialize();
 		
 		Log.info("Game initialized.");
 	}
+private void initialize() {
+	// Create the spaceship.
+			ground = new Ground(0,500);
+			weapondisplay = new WeaponDisplay(0, 0);
+			giuseppe = new Giuseppe(200, 200, weapondisplay);
+			weapondisplay.giuseppel = giuseppe;
+		
+			
+			// Add the spaceship to the list of renderable objects.
+			objectsToRender.add(giuseppe);
+			objectsToRender.add(ground);
+			objectsToRender.add(weapondisplay);
+			
+			
+			for (int i = 0; i < 500; i += 100) {
+				objectsToRender.add(new Alien(i, 100));
+			}	
+}
+/**
+ * Reset the game, i.e., perform a restart
+ */
+private void reset() {
+	
+	//Clear alle the objects from the game.
+	objectsToRender.clear();
+	
+	//Reintialize the game.
+	initialize();
+	
+}
 
 	@Override
 	public void run() {
@@ -79,6 +94,10 @@ public class Game implements Runnable {
 			// This loop goes forever, since we don't want our game
 			// logic to stop.
 			
+			// Check if the game should be resetted.
+			if (inputHandler.isKeyPressed(KeyEvent.VK_R)) {
+				reset();
+			}
 			// TODO: Add game mechanics here.
 			
 			// Update all game objects.

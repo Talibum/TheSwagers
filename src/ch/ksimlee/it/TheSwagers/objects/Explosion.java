@@ -11,7 +11,6 @@ public class Explosion extends ImageObject {
 	
 	private int lifetime = 5;
 	
-	private int speed = 10;
 
 	public Explosion(int x, int y) {
 		super(x, y, zIndex, false, FILENAME);
