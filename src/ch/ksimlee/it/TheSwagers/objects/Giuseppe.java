@@ -74,7 +74,7 @@ public class Giuseppe extends ImageObject {
 			}
 		}
 		
-		
+		RenderObject collision = null;
 		
 		// KEYS
 		
@@ -82,8 +82,10 @@ public class Giuseppe extends ImageObject {
 		if (game.getInputHandler().isKeyPressed(KeyEvent.VK_A) ||
 				game.getInputHandler().isKeyPressed(KeyEvent.VK_LEFT)) {
 			
-			move(-speed, 0, game.getObjectsToRender());
+			collision = move(-speed, 0, game.getObjectsToRender());
 			direction = 1;
+			
+			
 		}
 		
 		

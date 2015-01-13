@@ -41,6 +41,7 @@ public class Game implements Runnable {
 	
 	
 	private  Ground ground;
+	private Alien alien;
 	public  Giuseppe giuseppe;
 	public  WeaponDisplay weapondisplay;
 	public Canvas canvas;
@@ -56,28 +57,30 @@ public class Game implements Runnable {
 		
 		Log.info("Game initialized.");
 	}
-private void initialize() {
+public void initialize() {
 	// Create the spaceship.
 			ground = new Ground(0,500);
 			weapondisplay = new WeaponDisplay(0, 0);
+			//alien = new Alien(400,400);
 			giuseppe = new Giuseppe(200, 200, weapondisplay);
 			weapondisplay.giuseppel = giuseppe;
+			int g = 400;
+			for(int i=1;i < 20;i++){
+				objectsToRender.add(new Alien(g,400));
+				g = g + 200;
+			}
 		
 			
 			// Add the spaceship to the list of renderable objects.
 			objectsToRender.add(giuseppe);
 			objectsToRender.add(ground);
 			objectsToRender.add(weapondisplay);
-			
-			
-			for (int i = 0; i < 500; i += 100) {
-				objectsToRender.add(new Alien(i, 100));
-			}	
+			//objectsToRender.add(alien);
 }
 /**
  * Reset the game, i.e., perform a restart
  */
-private void reset() {
+public void reset() {
 	
 	//Clear alle the objects from the game.
 	objectsToRender.clear();
@@ -95,11 +98,11 @@ private void reset() {
 			// logic to stop.
 			
 			// Check if the game should be resetted.
-			if (inputHandler.isKeyPressed(KeyEvent.VK_R)) {
+			if (inputHandler.isKeyPressed(KeyEvent.VK_L)) {
 				reset();
 			}
 			// TODO: Add game mechanics here.
-			
+		
 			// Update all game objects.
 			for (RenderObject object : objectsToRender) {
 				object.update(this);

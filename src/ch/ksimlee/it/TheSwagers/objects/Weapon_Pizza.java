@@ -58,6 +58,7 @@ public class Weapon_Pizza extends ImageObject {
 		}
 		
 		if(shot != null && destroyableObjects.contains(shot.getClass())) {
+			game.getObjectsToRemove().add(this);
 			game.getObjectsToRemove().add(shot);
 		}
 		
